@@ -167,6 +167,7 @@ header {
         letter-spacing: 0;
         margin-left: 7px;
     }
+
 }
 
 .suggestions {
@@ -176,9 +177,10 @@ header {
     .gif-suggestion {
         background: #E6E6E6;
         box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
+        max-width: 280px;
 
         img {
-            max-width: 280px;
+            width: 280px;
             height: 280px;
             object-fit: cover;
         }
@@ -193,6 +195,11 @@ header {
             padding-left: 7px;
             padding-right: 8px;
 
+            img {
+                width: 16px;
+                height: 14px;
+            }
+
             p {
                 font-family: ChakraPetch-Bold;
                 font-size: 14px;
@@ -200,5 +207,71 @@ header {
                 letter-spacing: 0;
             }
         }
+    }
+}
+
+.trending-header {
+    margin-top: 4rem;
+    width: 100%;
+    height: 32px;
+    background: #FFFAFE;
+    border: 1px solid #E6BBE2;
+    box-shadow: inset -2px -2px 0 0 #E6DCE4, inset 2px 2px 0 0 #80687D;
+    display: flex;
+    align-items: center;
+    margin-bottom: 19px;
+
+    p {
+        font-family: ChakraPetch-Regular;
+        font-size: 14px;
+        color: #110038;
+        letter-spacing: 0;
+        margin-left: 7px;
+    }
+}
+
+.trending {
+    display:grid;
+    width: 100%;
+    grid-template-columns: auto auto auto auto;
+    grid-row-gap: 16px;
+    grid-column-gap: 16px;
+
+
+    .trending-gif {
+        min-width: 288px;
+        height: 298px;
+        display: flex;
+        position: relative;
+
+        .trending-gif-footer {
+            align-self: flex-end;
+            display: flex;
+            align-items: center;
+            position: absolute;
+            height: 24px;
+            width: 100%;
+            background-image: linear-gradient(270deg, #F7C9F3 0%, #4180F6 100%);
+
+            p {
+                font-family: ChakraPetch-Bold;
+                font-size: 14px;
+                color: #FFFFFF;
+                letter-spacing: 0;
+                margin-left: 7px;
+                margin-right: 8px;
+            }
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+        }
+    }
+
+    .trending-gif:nth-child(5n+0) {
+        grid-column-end: span 2;
+        width: auto;
     }
 }

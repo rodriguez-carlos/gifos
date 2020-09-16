@@ -301,10 +301,11 @@ header p {
   background: #E6E6E6;
   -webkit-box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
           box-shadow: inset -2px -2px 0 0 #B4B4B4, inset 2px 2px 0 0 #FFFFFF;
+  max-width: 280px;
 }
 
 .suggestions .gif-suggestion img {
-  max-width: 280px;
+  width: 280px;
   height: 280px;
   -o-object-fit: cover;
      object-fit: cover;
@@ -328,10 +329,97 @@ header p {
   padding-right: 8px;
 }
 
+.suggestions .gif-suggestion .gif-suggestion-header img {
+  width: 16px;
+  height: 14px;
+}
+
 .suggestions .gif-suggestion .gif-suggestion-header p {
   font-family: ChakraPetch-Bold;
   font-size: 14px;
   color: #FFFFFF;
   letter-spacing: 0;
+}
+
+.trending-header {
+  margin-top: 4rem;
+  width: 100%;
+  height: 32px;
+  background: #FFFAFE;
+  border: 1px solid #E6BBE2;
+  -webkit-box-shadow: inset -2px -2px 0 0 #E6DCE4, inset 2px 2px 0 0 #80687D;
+          box-shadow: inset -2px -2px 0 0 #E6DCE4, inset 2px 2px 0 0 #80687D;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 19px;
+}
+
+.trending-header p {
+  font-family: ChakraPetch-Regular;
+  font-size: 14px;
+  color: #110038;
+  letter-spacing: 0;
+  margin-left: 7px;
+}
+
+.trending {
+  display: -ms-grid;
+  display: grid;
+  width: 100%;
+  -ms-grid-columns: auto auto auto auto;
+      grid-template-columns: auto auto auto auto;
+  grid-row-gap: 16px;
+  grid-column-gap: 16px;
+}
+
+.trending .trending-gif {
+  min-width: 288px;
+  height: 298px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.trending .trending-gif .trending-gif-footer {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  height: 24px;
+  width: 100%;
+  background-image: -webkit-gradient(linear, right top, left top, from(#F7C9F3), to(#4180F6));
+  background-image: linear-gradient(270deg, #F7C9F3 0%, #4180F6 100%);
+}
+
+.trending .trending-gif .trending-gif-footer p {
+  font-family: ChakraPetch-Bold;
+  font-size: 14px;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  margin-left: 7px;
+  margin-right: 8px;
+}
+
+.trending .trending-gif img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+
+.trending .trending-gif:nth-child(5n+0) {
+  -ms-grid-column-span: 2;
+      grid-column-end: span 2;
+  width: auto;
 }
 /*# sourceMappingURL=index.css.map */

@@ -15,14 +15,40 @@ fetch(`${trendingURL}${apiKey}&limit=4`)
             const gifSuggestionGifImg = document.createElement("img")
             gifSuggestionGifImg.setAttribute("src", item.images.original.webp)
             const gifSuggestionHeaderP = document.createElement("p")
+            const gifSuggestionHeaderX = document.createElement("img")
+            gifSuggestionHeaderX.setAttribute("src", "./static/button3.svg")
             document.querySelector(".suggestions").appendChild(gifSuggestion)
             gifSuggestion.appendChild(gifSuggestionHeader)
             gifSuggestion.appendChild(gifSuggestionGif)
             gifSuggestionGif.appendChild(gifSuggestionGifImg)
             gifSuggestionHeader.appendChild(gifSuggestionHeaderP)
+            gifSuggestionHeader.appendChild(gifSuggestionHeaderX)
             gifSuggestionHeaderP.innerHTML = `#${item.title}`
         })
     })
+
+fetch(`${trendingURL}${apiKey}&limit=25`)
+    .then(response => response.json())
+    .then(data => {
+        data.data.forEach((item, index) => {
+            const trendingGif = document.createElement("div")
+            trendingGif.setAttribute("class", "trending-gif")
+            const trendingGifFooter = document.createElement("div")
+            trendingGifFooter.setAttribute("class", "trending-gif-footer")
+            const trendingGifFooterP = document.createElement("p")
+            trendingGifFooter.appendChild(trendingGifFooterP)
+            trendingGifFooterP.innerHTML = `#${item.title}`
+            const trendingGifImg = document.createElement("img")
+            document.querySelector(".trending").appendChild(trendingGif)
+            trendingGif.appendChild(trendingGifImg)
+            trendingGifImg.setAttribute("src", item.images.original.webp)
+            function addFooter() {trendingGif.appendChild(trendingGifFooter)}
+            function removeFooter() {trendingGif.removeChild(trendingGifFooter)}
+            trendingGif.addEventListener("mouseover", addFooter)
+            trendingGif.addEventListener("mouseout", removeFooter)
+        })
+    })
+
 
 const searchButton = document.querySelector(".search-button")
 
