@@ -6,6 +6,7 @@ fetch(`${trendingURL}${apiKey}&limit=4`)
     .then(response => response.json())
     .then(data => {
         data.data.forEach((item, index) => {
+            console.log(item)
             const gifSuggestion = document.createElement("div")
             gifSuggestion.setAttribute("class", "gif-suggestion")
             const gifSuggestionHeader = document.createElement("div")
@@ -55,9 +56,24 @@ const searchButton = document.querySelector(".search-button")
 searchButton.addEventListener("click", () => {
     const searchField = document.querySelector(".search-field-div input")
     const searchQuery = searchField.value
-    search(searchQuery)
+/*     search(searchQuery)
+ */    console.log(searchQuery)
 })
 
-function search(searchQuery) {
+/* function search(searchQuery) {
     fetch()
-}
+} */
+
+const themeSelectButton = document.getElementById("theme-select-button")
+let is_day = true;
+
+themeSelectButton.addEventListener("click", () => {
+    is_day = !is_day
+    const stylesheetRef = document.getElementById("stylesheet")
+
+    if(is_day) {
+        stylesheetRef.setAttribute("href", "./styles/dark_index.css")
+    } else {
+        stylesheetRef.setAttribute("href", "./styles/index.css")
+    }
+})

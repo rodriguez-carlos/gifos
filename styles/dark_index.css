@@ -56,19 +56,14 @@ table {
   font-family: 'Chakra Petch', sans-serif;
 }
 
-body {
-  background-color: #FFFFFF;
-  font-family: 'Chakra Petch', sans-serif;
-}
-
 a {
   text-decoration: none;
 }
 
 header {
   width: 100vw;
-  background-image: -webkit-gradient(linear, right top, left top, from(#F7C9F3), to(#4180F6));
-  background-image: linear-gradient(270deg, #F7C9F3 0%, #4180F6 100%);
+  background-image: -webkit-gradient(linear, right top, left top, from(#EE3EFE), to(#2E32FB));
+  background-image: linear-gradient(270deg, #EE3EFE 0%, #2E32FB 100%);
   -webkit-box-shadow: 0 1px 0 0 #110038;
           box-shadow: 0 1px 0 0 #110038;
   color: #FFFFFF;
@@ -122,10 +117,10 @@ header p {
 .main-container nav .nav-right .create-button {
   height: 36px;
   width: 144px;
-  background: #F7C9F3;
+  background: #EE3EFE;
   border: 1px solid #110038;
-  -webkit-box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
-          box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
+  -webkit-box-shadow: inset -1px -1px 0 0 #A72CB3, inset 1px 1px 0 0 #FFFFFF;
+          box-shadow: inset -1px -1px 0 0 #A72CB3, inset 1px 1px 0 0 #FFFFFF;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -147,10 +142,10 @@ header p {
   margin-left: 16px;
   height: 36px;
   width: 144px;
-  background: #F7C9F3;
+  background: #EE3EFE;
   border: 1px solid #110038;
-  -webkit-box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
-          box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
+  -webkit-box-shadow: inset -1px -1px 0 0 #A72CB3, inset 1px 1px 0 0 #FFFFFF;
+          box-shadow: inset -1px -1px 0 0 #A72CB3, inset 1px 1px 0 0 #FFFFFF;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -163,10 +158,10 @@ header p {
 }
 
 .main-container nav .nav-right .theme-select-button {
-  background: #F7C9F3;
+  background: #EE3EFE;
   border: 1px solid #110038;
-  -webkit-box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
-          box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF;
+  -webkit-box-shadow: inset -1px -1px 0 0 #A72CB3, inset 1px 1px 0 0 #FFFFFF;
+          box-shadow: inset -1px -1px 0 0 #A72CB3, inset 1px 1px 0 0 #FFFFFF;
   height: 36px;
   width: 36px;
   display: -webkit-box;
@@ -242,6 +237,7 @@ header p {
           align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  font-family: ChakraPetch-Regular;
   font-size: 16px;
   color: #B4B4B4;
   letter-spacing: 0;
@@ -285,6 +281,7 @@ header p {
 }
 
 .suggestions-header p {
+  font-family: ChakraPetch-Regular;
   font-size: 14px;
   color: #110038;
   letter-spacing: 0;
@@ -338,12 +335,10 @@ header p {
 }
 
 .suggestions .gif-suggestion .gif-suggestion-header p {
+  font-family: ChakraPetch-Bold;
   font-size: 14px;
   color: #FFFFFF;
   letter-spacing: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 95%;
 }
 
 .trending-header {
@@ -364,6 +359,7 @@ header p {
 }
 
 .trending-header p {
+  font-family: ChakraPetch-Regular;
   font-size: 14px;
   color: #110038;
   letter-spacing: 0;
@@ -406,6 +402,7 @@ header p {
 }
 
 .trending .trending-gif .trending-gif-footer p {
+  font-family: ChakraPetch-Bold;
   font-size: 14px;
   color: #FFFFFF;
   letter-spacing: 0;
@@ -425,4 +422,4 @@ header p {
       grid-column-end: span 2;
   width: auto;
 }
-/*# sourceMappingURL=index.css.map */
+/*# sourceMappingURL=dark_index.css.map */
