@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap" rel="stylesheet">
+    <link id="stylesheet" rel="stylesheet" href="styles/index.css">
+    <title>Crea tu guifo</title>
+</head>
+<body>
+    <header>
+        <p>¡Bienvenidos/as a Guifos.com! ——————Donde los gifs están.////// Número de visitas: 12.765.803</p>
+    </header>
+    <section class="main-container">
+        <nav>
+            <div class="nav-left">
+                <a href="index.html"><img src="static/arrow.svg" id="back-arrow" alt="Back Arrow"></a>
+                <img src="static/gifOF_logo.png" alt="Logo de gifOS" id="gifos-logo" />
+            </div>
+        </nav>
+        <div class="capture-page-content">
+            <div class="alert-box">
+                <div class="alert-box-title">&nbsp Crear Guifos</div>
+                <div class ="alert-box-body" id="box-instructions">
+                    <div class="alert-box-body-title">
+                        <img src="static/window img.png" alt="Window Image">
+                        <p>Aquí podrás crear tus propios guifos</p>
+                    </div>
+                    <div class="alert-box-body-content">
+                        <p>Crear tu guifo es muy fácil, graba cualquier imagen con tu cámara y 
+                            obtén guifos personalizados. Los pasos para crear tu guifo son:</p>
+                            <ol>
+                                <li>Dar permisos de acceso a la cámara (sólo por el tiempo de uso)</li>
+                                <li>Capturar tu momento guifo</li>
+                                <li>Revisar el momento</li>
+                                <li>Listo para subir y compartir!</li>
+                            </ol>
+                            <p>¿Quieres comenzar a crear tu guifo ahora?</p>
+                    </div>
+                    <div class="alert-box-body-buttons">
+                        <div class="left-button"><a href="index.html">Cancelar</a></div>
+                        <div class="right-button" id="prep-start-button">
+                            Comenzar
+                        </div>
+                    </div>
+                </div>
+                <div class = "alert-box-body" id="box-capture">
+                    <div class = "video-box">
+                        <video src="" id="video"></video>
+                        <img src="" alt="" id="resulting-gif">
+                        <div class="waiting-page">
+                            <img src="static\globe_img.png" alt="Waiting">
+                            <p>Estamos subiendo tu guifo...</p>
+                        </div>
+                    </div>
+                    <div class="alert-box-body-buttons">
+                        <div class="left-button" id="repeat-capture-button">Repetir Captura</div>
+                        <div class="icon-on-button"><img src="static\camera.svg" alt=""></div>
+                        <div class="right-button" id="start-recording-button">Capturar</div>
+                        <div class="right-button" id="stop-recording-button">Listo</div>
+                        <div class="right-button" id="upload-gif-button">Subir Guifo</div>
+                    </div>
+                </div>
+                <div class="alert-box-body" id="successful-upload">
+                    <div class="success-left-side">
+                        <img src="" alt="">
+                    </div>
+                    <div class="success-right-side">
+                        <p>Guifo creado con éxito</p>
+                        <div class="upper-buttons" id="copy-link-button">Copiar Enlace Guifo</div>
+                        <div class="upper-buttons" id="download-gif-button">Descargar Guifo</div>
+                        <div class="right-button" id="done-button">Listo</div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <section class="main-container">
+        <div class="trending-header">
+            <p>Mis guifos</p>
+        </div>
+        <div class="trending" id="my-gifs-gifs"></div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.8/RecordRTC.js" type="text/javascript"></script>
+    <script src="scripts/capture.js"></script>
+</body>
+</html>

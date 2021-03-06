@@ -1,12 +1,17 @@
 const apiKey = "?api_key=NhkbTXgn9v5BTORkUVCY0S5hiaabOOip"
 
 const trendingURL = "https://api.giphy.com/v1/gifs/trending"
+const searchURL = "https://api.giphy.com/v1/gifs/search"
+let suggestions = ["zelda", "colbert", "luigi", "javascript", "star wars", "environment", "shera", "the office"]
 
-fetch(`${trendingURL}${apiKey}&limit=4`)
+let suggestionsRandomIndex = Math.round(Math.random()*(suggestions.length))
+let suggested = suggestions[suggestionsRandomIndex]
+
+
+fetch(`${searchURL}${apiKey}&limit=4&q=${suggested}`)
     .then(response => response.json())
     .then(data => {
         data.data.forEach((item, index) => {
-            console.log(item)
             const gifSuggestion = document.createElement("div")
             gifSuggestion.setAttribute("class", "gif-suggestion")
             const gifSuggestionHeader = document.createElement("div")
@@ -14,7 +19,7 @@ fetch(`${trendingURL}${apiKey}&limit=4`)
             const gifSuggestionGif = document.createElement("div")
             gifSuggestionGif.setAttribute("class", "gif-suggestion-gif")
             const gifSuggestionGifImg = document.createElement("img")
-            gifSuggestionGifImg.setAttribute("src", item.images.original.webp)
+            gifSuggestionGifImg.setAttribute("src", item.images.original.url)
             const gifSuggestionHeaderP = document.createElement("p")
             const gifSuggestionHeaderX = document.createElement("img")
             gifSuggestionHeaderX.setAttribute("src", "./static/button3.svg")
@@ -42,7 +47,7 @@ fetch(`${trendingURL}${apiKey}&limit=25`)
             const trendingGifImg = document.createElement("img")
             document.querySelector(".trending").appendChild(trendingGif)
             trendingGif.appendChild(trendingGifImg)
-            trendingGifImg.setAttribute("src", item.images.original.webp)
+            trendingGifImg.setAttribute("src", item.images.original.url)
             function addFooter() {trendingGif.appendChild(trendingGifFooter)}
             function removeFooter() {trendingGif.removeChild(trendingGifFooter)}
             trendingGif.addEventListener("mouseover", addFooter)
@@ -51,29 +56,63 @@ fetch(`${trendingURL}${apiKey}&limit=25`)
     })
 
 
+const themeSelectButton = document.getElementById("theme-select-button")
+const dropdownMenu = document.querySelector(".theme-dropdown-menu")
+
+
+themeSelectButton.addEventListener("click", () => {
+    if (dropdownMenu.style.display === "none") {
+        dropdownMenu.style.display = "flex"
+    } else {
+        dropdownMenu.style.display = "none"
+    }
+})
+
+const sailorDayButton = document.querySelector(".theme-sailor-day")
+const sailorNightButton = document.querySelector(".theme-sailor-night")
+const stylesheetRef = document.getElementById("stylesheet")
+const gifOsLogo = document.getElementById("gifos-logo")
+
+sailorDayButton.addEventListener("click", () => {
+    stylesheetRef.setAttribute("href", "./styles/index.css")
+    gifOsLogo.setAttribute("src", "./static/gifOF_logo.png")
+    dropdownMenu.style.display = "none"
+})
+
+sailorNightButton.addEventListener("click", () => {
+    stylesheetRef.setAttribute("href", "./styles/dark_index.css")
+    gifOsLogo.setAttribute("src", "./static/gifOF_logo_dark.png")
+    dropdownMenu.style.display = "none"
+})
+
 const searchButton = document.querySelector(".search-button")
+const searchBar = document.querySelector(".search-bar")
+const searchBackButton = document.querySelector(".search-results a")
 
 searchButton.addEventListener("click", () => {
     const searchField = document.querySelector(".search-field-div input")
+    const resultsBar = document.getElementById("search-results-header")
     const searchQuery = searchField.value
-/*     search(searchQuery)
- */    console.log(searchQuery)
+    resultsBar.style.display = "flex"
+    searchBar.style.display = "none"
+    searchBackButton.style.display = "block"
+    getSearchResults(searchQuery)
 })
 
-/* function search(searchQuery) {
-    fetch()
-} */
-
-const themeSelectButton = document.getElementById("theme-select-button")
-let is_day = true;
-
-themeSelectButton.addEventListener("click", () => {
-    is_day = !is_day
-    const stylesheetRef = document.getElementById("stylesheet")
-
-    if(is_day) {
-        stylesheetRef.setAttribute("href", "./styles/dark_index.css")
-    } else {
-        stylesheetRef.setAttribute("href", "./styles/index.css")
-    }
-})
+function getSearchResults(searchQuery) {
+    fetch(`${searchURL}${apiKey}&limit=16&q=${searchQuery}`)
+        .then(response => response.json())
+        .then(data => {
+            data.data.forEach((item, index) => {
+                const gifResult = document.createElement("div")
+                gifResult.setAttribute("class", "gif-result")
+                const gifResultGif = document.createElement("div")
+                gifResultGif.setAttribute("class", "gif-result-gif")
+                const gifResultGifImg = document.createElement("img")
+                gifResultGifImg.setAttribute("src", item.images.original.url)
+                document.querySelector(".search-results-posts").appendChild(gifResult)
+                gifResult.appendChild(gifResultGif)
+                gifResultGif.appendChild(gifResultGifImg)
+            })
+        })
+}
