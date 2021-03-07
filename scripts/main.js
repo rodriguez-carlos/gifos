@@ -133,13 +133,10 @@ function getSearchResults(searchQuery) {
             data.data.forEach((item, index) => {
                 const gifResult = document.createElement("div")
                 gifResult.setAttribute("class", "gif-result")
-                const gifResultGif = document.createElement("div")
-                gifResultGif.setAttribute("class", "gif-result-gif")
                 const gifResultGifImg = document.createElement("img")
                 gifResultGifImg.setAttribute("src", item.images.original.url)
                 document.querySelector(".search-results-posts").appendChild(gifResult)
-                gifResult.appendChild(gifResultGif)
-                gifResultGif.appendChild(gifResultGifImg)
+                gifResult.appendChild(gifResultGifImg)
             })
         })
 }

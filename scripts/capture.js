@@ -4,6 +4,7 @@ const getGifByIdURL = "api.giphy.com/v1/gifs/"
 
 const video = document.getElementById('video')
 const image = document.getElementById('resulting-gif')
+const alertBox = document.querySelector(".alert-box")
 const alertBoxTitle = document.querySelector(".alert-box-title")
 const captureBox = document.getElementById("box-capture")
 const instructionsBox = document.getElementById("box-instructions")
@@ -113,6 +114,8 @@ stopRecordingButton.addEventListener('click', () => {
     form.append('file', recorder.getBlob(), `${datestamp.toISOString()}.gif`)
     form.append('api_key', apiKey)
 })
+doneButton = document.getElementById('done-button')
+const successPage = document.getElementById('successful-upload')
 
 uploadGifButton.addEventListener('click', () => {
     uploadGif(uploadURL, apiKey, form)
@@ -125,12 +128,14 @@ uploadGifButton.addEventListener('click', () => {
     setTimeout(() => {
         boxTitle.innerHTML = "&nbspGuifo Subido Con Éxito"
         waitingPage.style.display = "none"
-        const successPage = document.getElementById('successful-upload')
         const successPagePreview = document.querySelector('#successful-upload img')
         successPagePreview.setAttribute("src", blobURL)
         successPage.style.display = "flex"
         captureBox.style.display = "none"
     }, 4000)
+})
+doneButton.addEventListener('click', () =>{
+    alertBox.style.display = "none"
 })
 
 repeatRecordingButton.addEventListener('click', () => {
