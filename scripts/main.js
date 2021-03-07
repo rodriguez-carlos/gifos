@@ -2,6 +2,8 @@ const apiKey = "?api_key=NhkbTXgn9v5BTORkUVCY0S5hiaabOOip"
 
 const trendingURL = "https://api.giphy.com/v1/gifs/trending"
 const searchURL = "https://api.giphy.com/v1/gifs/search"
+const getGifByIdURL = "api.giphy.com/v1/gifs/"
+
 let suggestions = ["zelda", "colbert", "luigi", "javascript", "star wars", "environment", "shera", "the office"]
 
 let suggestionsRandomIndex = Math.round(Math.random()*(suggestions.length))
@@ -18,6 +20,7 @@ fetch(`${searchURL}${apiKey}&limit=4&q=${suggested}`)
             gifSuggestionHeader.setAttribute("class", "gif-suggestion-header")
             const gifSuggestionGif = document.createElement("div")
             gifSuggestionGif.setAttribute("class", "gif-suggestion-gif")
+            gifSuggestionGif.setAttribute("class", "dotted-hover")
             const gifSuggestionGifImg = document.createElement("img")
             gifSuggestionGifImg.setAttribute("src", item.images.original.url)
             const gifSuggestionHeaderP = document.createElement("p")
@@ -57,10 +60,19 @@ fetch(`${trendingURL}${apiKey}&limit=25`)
 
 
 const themeSelectButton = document.getElementById("theme-select-button")
+const themeSelectText = document.querySelector('.theme-select-text')
 const dropdownMenu = document.querySelector(".theme-dropdown-menu")
 
 
 themeSelectButton.addEventListener("click", () => {
+    if (dropdownMenu.style.display === "none") {
+        dropdownMenu.style.display = "flex"
+    } else {
+        dropdownMenu.style.display = "none"
+    }
+})
+
+themeSelectText.addEventListener("click", () => {
     if (dropdownMenu.style.display === "none") {
         dropdownMenu.style.display = "flex"
     } else {
@@ -88,15 +100,30 @@ sailorNightButton.addEventListener("click", () => {
 const searchButton = document.querySelector(".search-button")
 const searchBar = document.querySelector(".search-bar")
 const searchBackButton = document.querySelector(".search-results a")
+const searchField = document.querySelector(".search-field-div input")
+const lookingGlass = document.querySelector(".search-button img")
+
+searchField.addEventListener('input', (event) => {
+    if (event.target.value) {
+        searchButton.classList.add('active-search-button')
+        searchButton.classList.add('dotted-hover')
+        lookingGlass.setAttribute("src", "static/lupa.svg")
+    } else {
+        searchButton.classList.remove("active-search-button")
+        searchButton.classList.remove("dotted-hover")
+        lookingGlass.setAttribute("src", "static/lupa_inactive.svg")
+    }
+})
 
 searchButton.addEventListener("click", () => {
-    const searchField = document.querySelector(".search-field-div input")
     const resultsBar = document.getElementById("search-results-header")
     const searchQuery = searchField.value
-    resultsBar.style.display = "flex"
-    searchBar.style.display = "none"
-    searchBackButton.style.display = "block"
-    getSearchResults(searchQuery)
+    if (searchQuery) {
+        resultsBar.style.display = "flex"
+        searchBar.style.display = "none"
+        searchBackButton.style.display = "block"
+        getSearchResults(searchQuery)
+    }
 })
 
 function getSearchResults(searchQuery) {
@@ -116,3 +143,44 @@ function getSearchResults(searchQuery) {
             })
         })
 }
+
+const myGifsButton = document.querySelector(".nav-link p")
+let localStorageArray = []
+
+function appendGif(item) {
+    const trendingGif = document.createElement("div")
+    trendingGif.setAttribute("class", "trending-gif")
+    const trendingGifImg = document.createElement("img")
+    document.getElementById("my-gifs-gifs").appendChild(trendingGif)
+    trendingGif.appendChild(trendingGifImg)
+
+    fetch(`https://${getGifByIdURL}${item}${apiKey}`)
+        .then(response => response.json())
+        .then(data => trendingGifImg.setAttribute("src", data.data.images.original.url))
+}
+
+function loadMyGifs() {
+    let i
+    for (i = localStorage.length - 1; i >= 0; i--) {
+        let item = localStorage.getItem(localStorage.key(i))
+        localStorageArray.push(item)
+        console.log(item)
+        appendGif(item)
+    }
+}
+const suggestionsHeader = document.getElementById('poof')
+const suggestionsContainer = document.querySelector('.suggestions')
+const trendingHeader = document.querySelector('.trending-header')
+const trendingContainer = document.querySelector('.trending')
+const searchResults = document.querySelector('.search-results')
+
+myGifsButton.addEventListener('click', () => {
+    searchBar.style.display = "none"
+    suggestionsHeader.style.display = "none"
+    suggestionsContainer.style.display = "none"
+    searchResults.style.display.none = "none"
+    trendingHeader.innerHTML = "&nbspMis guifos"
+    trendingContainer.style.display = "none"
+    loadMyGifs()
+})
+

@@ -490,6 +490,7 @@ header p {
   display: -ms-flexbox;
   display: flex;
   position: relative;
+  background-color: #c0c0c0;
 }
 
 .trending .trending-gif .trending-gif-footer {
@@ -768,8 +769,19 @@ header p {
   display: none;
 }
 
+#start-recording-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 #stop-recording-button {
   display: none;
+}
+
+#stop-recording-button .icon-on-button, #stop-recording-button .right-button {
+  background-color: #FF6161;
+  color: #fff;
 }
 
 #upload-gif-button {
@@ -850,5 +862,21 @@ header p {
   margin-top: 100px;
   -ms-flex-item-align: end;
       align-self: flex-end;
+}
+
+.left-button:hover, .create-button:hover,
+.theme-select-button:hover, .nav-link p:hover, .theme-select-text:hover,
+.dotted-hover:hover {
+  outline: 1px dotted #110038;
+  outline-offset: -3px;
+  cursor: pointer;
+}
+
+.active-search-button {
+  background: #F7C9F3 !important;
+  border: 1px solid #110038 !important;
+  -webkit-box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF !important;
+          box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF !important;
+  color: #110038 !important;
 }
 /*# sourceMappingURL=index.css.map */

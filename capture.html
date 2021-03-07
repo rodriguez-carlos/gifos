@@ -14,7 +14,7 @@
     <section class="main-container">
         <nav>
             <div class="nav-left">
-                <a href="index.html"><img src="static/arrow.svg" id="back-arrow" alt="Back Arrow"></a>
+                <a href="index.html"><img class="dotted-hover" src="static/arrow.svg" id="back-arrow" alt="Back Arrow"></a>
                 <img src="static/gifOF_logo.png" alt="Logo de gifOS" id="gifos-logo" />
             </div>
         </nav>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="alert-box-body-buttons">
                         <div class="left-button"><a href="index.html">Cancelar</a></div>
-                        <div class="right-button" id="prep-start-button">
+                        <div class="right-button dotted-hover" id="prep-start-button">
                             Comenzar
                         </div>
                     </div>
@@ -55,10 +55,15 @@
                     </div>
                     <div class="alert-box-body-buttons">
                         <div class="left-button" id="repeat-capture-button">Repetir Captura</div>
-                        <div class="icon-on-button"><img src="static\camera.svg" alt=""></div>
-                        <div class="right-button" id="start-recording-button">Capturar</div>
-                        <div class="right-button" id="stop-recording-button">Listo</div>
-                        <div class="right-button" id="upload-gif-button">Subir Guifo</div>
+                        <div id="start-recording-button" class="dotted-hover">
+                            <div class="icon-on-button"><img src="static\camera.svg" alt=""></div>
+                            <div class="right-button">Capturar</div>
+                        </div>
+                        <div id="stop-recording-button" class="dotted-hover">
+                            <div class="icon-on-button"><img src="static/recording.svg" alt=""></div>
+                            <div class="right-button">Listo</div>
+                        </div>
+                        <div class="right-button dotted-hover" id="upload-gif-button">Subir Guifo</div>
                     </div>
                 </div>
                 <div class="alert-box-body" id="successful-upload">
@@ -67,9 +72,9 @@
                     </div>
                     <div class="success-right-side">
                         <p>Guifo creado con éxito</p>
-                        <div class="upper-buttons" id="copy-link-button">Copiar Enlace Guifo</div>
-                        <div class="upper-buttons" id="download-gif-button">Descargar Guifo</div>
-                        <div class="right-button" id="done-button">Listo</div>
+                        <div class="upper-buttons dotted-hover" id="copy-link-button">Copiar Enlace Guifo</div>
+                        <div class="upper-buttons dotted-hover" id="download-gif-button">Descargar Guifo</div>
+                        <div class="right-button dotted-hover" id="done-button">Listo</div>
                     </div>
                 </div>
             </div>

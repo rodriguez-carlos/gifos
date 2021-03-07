@@ -337,6 +337,7 @@ header {
         height: 298px;
         display: flex;
         position: relative;
+        background-color: #c0c0c0;
 
         .trending-gif-footer {
             align-self: flex-end;
@@ -542,15 +543,24 @@ header {
 }
 
 #box-capture {
-    display: none
+    display: none;
+}
+
+#start-recording-button {
+    display: flex;
 }
 
 #stop-recording-button {
-    display: none
+    display: none;
+
+    .icon-on-button, .right-button {
+        background-color: #FF6161;
+        color: #fff;
+    }
 }
 
 #upload-gif-button {
-    display: none
+    display: none;
 }
 
 #repeat-capture-button {
@@ -607,4 +617,21 @@ header {
         }
     }
 
+}
+
+.left-button, .create-button,
+.theme-select-button, .nav-link p, .theme-select-text,
+.dotted-hover {
+    &:hover {
+        outline: 1px dotted #110038;
+        outline-offset: -3px;
+        cursor: pointer;
+    }
+}
+
+.active-search-button {
+    background: #F7C9F3 !important;
+    border: 1px solid #110038 !important;
+    box-shadow: inset -1px -1px 0 0 #997D97, inset 1px 1px 0 0 #FFFFFF !important;
+    color: #110038 !important;
 }
