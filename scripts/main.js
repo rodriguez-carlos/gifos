@@ -4,30 +4,34 @@ const trendingURL = "https://api.giphy.com/v1/gifs/trending"
 const searchURL = "https://api.giphy.com/v1/gifs/search"
 const getGifByIdURL = "api.giphy.com/v1/gifs/"
 
-let suggestions = ["zelda", "colbert", "luigi", "javascript", "star wars", "environment", "shera", "the office"]
-
-let suggestionsRandomIndex = Math.round(Math.random()*(suggestions.length))
-let suggested = suggestions[suggestionsRandomIndex]
+const suggestions = ["zelda", "colbert", "luigi", "community", 
+"star wars", "environment", "she-ra", "the office"]
 
 
 
-fetch(`${searchURL}${apiKey}&limit=4&q=${suggested}`)
-    .then(response => response.json())
-    .then(data => {
-        data.data.forEach((item, index) => {
+for (let k = 0; k < 4; k++) {
+    let suggested = suggestions[k]
+    console.log(suggestions[k])
+    fetch(`${searchURL}${apiKey}&limit=1&q=${suggestions[k]}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(suggested)
             const gifSuggestion = document.createElement("div")
             gifSuggestion.setAttribute("class", "gif-suggestion")
+            gifSuggestion.setAttribute('id', `suggestion${k}`)
             const gifSuggestionHeader = document.createElement("div")
             gifSuggestionHeader.setAttribute("class", "gif-suggestion-header")
             const gifSuggestionGif = document.createElement("div")
             gifSuggestionGif.setAttribute("class", "dotted-hover")
             const gifSuggestionGifImg = document.createElement("img")
-            gifSuggestionGifImg.setAttribute("src", item.images.original.url)
+            gifSuggestionGifImg.setAttribute("src", data.data[0].images.original.url)
             const gifSuggestionHeaderP = document.createElement("p")
             const gifSuggestionHeaderX = document.createElement("img")
             const viewMoreButton = document.createElement('div')
             viewMoreButton.classList.add("view-more-button")
             viewMoreButton.classList.add('dotted-hover')
+            viewMoreButton.setAttribute('id', suggested)
+            viewMoreButton.addEventListener('click', viewMoreClick)
             gifSuggestionGif.appendChild(viewMoreButton)
             viewMoreButton.innerHTML = "Ver más..."
             gifSuggestionHeaderX.setAttribute("src", "./static/button3.svg")
@@ -39,7 +43,8 @@ fetch(`${searchURL}${apiKey}&limit=4&q=${suggested}`)
             gifSuggestionHeader.appendChild(gifSuggestionHeaderX)
             gifSuggestionHeaderP.innerHTML = `#${suggested}`
         })
-    })
+}
+
 
 fetch(`${trendingURL}${apiKey}&limit=25`)
     .then(response => response.json())
@@ -205,3 +210,8 @@ myGifsButton.addEventListener('click', () => {
     loadMyGifs()
 })
 
+
+function viewMoreClick(event) {
+    searchField.value = event.target.id
+    searchButton.click()
+}
