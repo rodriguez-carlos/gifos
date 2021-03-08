@@ -14,7 +14,17 @@ const startRecordingButton = document.getElementById("start-recording-button")
 const stopRecordingButton = document.getElementById("stop-recording-button")
 const uploadGifButton = document.getElementById("upload-gif-button")
 const repeatRecordingButton = document.getElementById("repeat-capture-button")
+const waitingPage = document.querySelector('.waiting-page')
+const stylesheetRef = document.getElementById("stylesheet")
+const gifOsLogo = document.getElementById("gifos-logo")
+const captureCamera = document.querySelector('.icon-on-button img')
+const doneButton = document.getElementById('done-button')
+const copyLinkButton = document.getElementById('copy-link-button')
+const downloadGifButton = document.getElementById('download-gif-button')
+const successPage = document.getElementById('successful-upload')
 let iconOnButton = document.querySelector(".icon-on-button")
+let localStorageArray = []
+let gifLink
 let recorder
 let tracks
 let blobURL
@@ -29,6 +39,13 @@ function uploadGif (uploadURL, apiKey, data) {
     .then(data => {
         addToLocalStorage(data)
         appendGif(data.data.id)
+        boxTitle.innerHTML = "&nbspGuifo Subido Con Éxito"
+        waitingPage.style.display = "none"
+        const successPagePreview = document.querySelector('#successful-upload img')
+        successPagePreview.setAttribute("src", blobURL)
+        successPage.style.display = "flex"
+        captureBox.style.display = "none"
+        gifLink = `https://giphy.com/gifs/${data.data.id}`
     })
     .catch(() => console.log('Upload was not completed'))
 }
@@ -59,7 +76,6 @@ function videoCapture() {
     .catch(console.error)
 }
 
-let localStorageArray = []
 
 function appendGif(item) {
     const trendingGif = document.createElement("div")
@@ -68,7 +84,7 @@ function appendGif(item) {
     document.querySelector(".trending").appendChild(trendingGif)
     trendingGif.appendChild(trendingGifImg)
 
-    fetch(`https://${getGifByIdURL}${item}?api_key=${apiKey}`)
+    return fetch(`https://${getGifByIdURL}${item}?api_key=${apiKey}`)
         .then(response => response.json())
         .then(data => trendingGifImg.setAttribute("src", data.data.images.original.url))
 }
@@ -82,6 +98,19 @@ function loadMyGifs() {
             appendGif(item)
         }
     }
+}
+
+function dayMode ()  {
+    stylesheetRef.setAttribute("href", "./styles/index.css")
+    gifOsLogo.setAttribute("src", "./static/gifOF_logo.png")
+    captureCamera.setAttribute('src', 'static/camera.svg')
+    localStorage.removeItem('nightTheme')
+}
+function nightMode ()  {
+    stylesheetRef.setAttribute("href", "./styles/dark_index.css")
+    gifOsLogo.setAttribute("src", "./static/gifOF_logo_dark.png")
+    captureCamera.setAttribute('src', 'static/camera_light.svg')
+    localStorage.setItem('nightTheme', '1')
 }
 
 prepButton.addEventListener('click', () => {
@@ -116,8 +145,6 @@ stopRecordingButton.addEventListener('click', () => {
     form.append('file', recorder.getBlob(), `${datestamp.toISOString()}.gif`)
     form.append('api_key', apiKey)
 })
-doneButton = document.getElementById('done-button')
-const successPage = document.getElementById('successful-upload')
 
 uploadGifButton.addEventListener('click', () => {
     uploadGif(uploadURL, apiKey, form)
@@ -125,17 +152,9 @@ uploadGifButton.addEventListener('click', () => {
     boxTitle.innerHTML = "&nbspSubiendo Guifo"
     repeatRecordingButton.style.display = "none"
     uploadGifButton.style.display = "none"
-    let waitingPage = document.querySelector('.waiting-page')
     waitingPage.style.display = "flex"
-    setTimeout(() => {
-        boxTitle.innerHTML = "&nbspGuifo Subido Con Éxito"
-        waitingPage.style.display = "none"
-        const successPagePreview = document.querySelector('#successful-upload img')
-        successPagePreview.setAttribute("src", blobURL)
-        successPage.style.display = "flex"
-        captureBox.style.display = "none"
-    }, 4000)
 })
+
 doneButton.addEventListener('click', () =>{
     alertBox.style.display = "none"
 })
@@ -153,24 +172,18 @@ repeatRecordingButton.addEventListener('click', () => {
     videoCapture()
 })
 
+copyLinkButton.addEventListener('click', () => {
+    const inputLink = document.createElement('input')
+    document.body.appendChild(inputLink)
+    inputLink.setAttribute('value', gifLink)
+    inputLink.select()
+    inputLink.setSelectionRange(0, 99999)
+    document.execCommand('copy')
+    alert('¡Ya copiaste el link de tu Guifo! ' + gifLink)
+    document.body.removeChild(inputLink)
+})
+
 loadMyGifs()
-
-const stylesheetRef = document.getElementById("stylesheet")
-const gifOsLogo = document.getElementById("gifos-logo")
-const captureCamera = document.querySelector('.icon-on-button img')
-
-function dayMode ()  {
-    stylesheetRef.setAttribute("href", "./styles/index.css")
-    gifOsLogo.setAttribute("src", "./static/gifOF_logo.png")
-    captureCamera.setAttribute('src', 'static/camera.svg')
-    localStorage.removeItem('nightTheme')
-}
-function nightMode ()  {
-    stylesheetRef.setAttribute("href", "./styles/dark_index.css")
-    gifOsLogo.setAttribute("src", "./static/gifOF_logo_dark.png")
-    captureCamera.setAttribute('src', 'static/camera_light.svg')
-    localStorage.setItem('nightTheme', '1')
-}
 
 if (localStorage.getItem('nightTheme')) {
     nightMode()

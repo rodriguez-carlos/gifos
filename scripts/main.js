@@ -189,6 +189,7 @@ const trendingContainer = document.querySelector('.trending')
 const searchResults = document.querySelector('.search-results')
 const myGifsContainer = document.getElementById('my-gifs-gifs')
 
+
 myGifsButton.addEventListener('click', () => {
     myGifsContainer.innerHTML = ""
     searchBar.style.display = "none"
