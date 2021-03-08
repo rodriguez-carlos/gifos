@@ -7,7 +7,7 @@ const getGifByIdURL = "api.giphy.com/v1/gifs/"
 const suggestions = ["zelda", "colbert", "luigi", "community", 
 "star wars", "wandavision", "she-ra", "the office", "avengers",
 "environment", "puppies", "green", "pizza", "javascript",
-"nintendo", "burgers", "cars", "dark"]
+"nintendo", "burgers", "stranger things", "dark", "modern family"]
 
 let counter = 0
 
