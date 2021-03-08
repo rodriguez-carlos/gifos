@@ -5,17 +5,18 @@ const searchURL = "https://api.giphy.com/v1/gifs/search"
 const getGifByIdURL = "api.giphy.com/v1/gifs/"
 
 const suggestions = ["zelda", "colbert", "luigi", "community", 
-"star wars", "environment", "she-ra", "the office"]
+"star wars", "wandavision", "she-ra", "the office", "avengers",
+"environment", "puppies", "green", "pizza", "javascript",
+"nintendo", "burgers", "cars", "dark"]
 
-
+let counter = 0
 
 for (let k = 0; k < 4; k++) {
     let suggested = suggestions[k]
-    console.log(suggestions[k])
+    counter++
     fetch(`${searchURL}${apiKey}&limit=1&q=${suggestions[k]}`)
         .then(response => response.json())
         .then(data => {
-            console.log(suggested)
             const gifSuggestion = document.createElement("div")
             gifSuggestion.setAttribute("class", "gif-suggestion")
             gifSuggestion.setAttribute('id', `suggestion${k}`)
@@ -27,6 +28,7 @@ for (let k = 0; k < 4; k++) {
             gifSuggestionGifImg.setAttribute("src", data.data[0].images.original.url)
             const gifSuggestionHeaderP = document.createElement("p")
             const gifSuggestionHeaderX = document.createElement("img")
+            gifSuggestionHeaderX.addEventListener('click', removeSuggestion)
             const viewMoreButton = document.createElement('div')
             viewMoreButton.classList.add("view-more-button")
             viewMoreButton.classList.add('dotted-hover')
@@ -35,6 +37,7 @@ for (let k = 0; k < 4; k++) {
             gifSuggestionGif.appendChild(viewMoreButton)
             viewMoreButton.innerHTML = "Ver más..."
             gifSuggestionHeaderX.setAttribute("src", "./static/button3.svg")
+            gifSuggestionHeaderX.setAttribute('id', `remove${k}`)
             document.querySelector(".suggestions").appendChild(gifSuggestion)
             gifSuggestion.appendChild(gifSuggestionHeader)
             gifSuggestion.appendChild(gifSuggestionGif)
@@ -44,6 +47,7 @@ for (let k = 0; k < 4; k++) {
             gifSuggestionHeaderP.innerHTML = `#${suggested}`
         })
 }
+
 
 
 fetch(`${trendingURL}${apiKey}&limit=25`)
@@ -210,8 +214,31 @@ myGifsButton.addEventListener('click', () => {
     loadMyGifs()
 })
 
-
 function viewMoreClick(event) {
     searchField.value = event.target.id
     searchButton.click()
+}
+
+function removeSuggestion(event) {
+    const newSuggested = suggestions[counter]
+    if (!newSuggested) {
+        alert('No tenemos más sugerencias...')
+        return
+    }
+    let xId = event.target.id
+    const gifId = xId.replace("remove", "suggestion")
+    const gifContainer = document.querySelector(`#${gifId} .dotted-hover`)
+    const oldGifImg = document.querySelector(`#${gifId} .dotted-hover img`)
+    gifContainer.removeChild(oldGifImg)
+    counter++
+    fetch(`${searchURL}${apiKey}&limit=1&q=${newSuggested}`)
+        .then(response => response.json())
+        .then(data => {
+            gifContainer.appendChild(oldGifImg)
+            oldGifImg.setAttribute('src', data.data[0].images.original.url)
+            const oldGifHeader = document.querySelector(`#${gifId} .gif-suggestion-header p`)
+            oldGifHeader.innerHTML = `#${newSuggested}`
+            const oldViewMoreButton = document.querySelector(`#${gifId} .view-more-button`)
+            oldViewMoreButton.setAttribute('id', newSuggested)
+        })
 }
