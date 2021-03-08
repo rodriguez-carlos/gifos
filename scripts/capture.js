@@ -183,6 +183,14 @@ copyLinkButton.addEventListener('click', () => {
     document.body.removeChild(inputLink)
 })
 
+downloadGifButton.addEventListener('click', () => {
+    const anchor = document.createElement('a')
+    anchor.href = blobURL
+    anchor.target = "_blank"
+    anchor.download = 'my-gif'
+    anchor.click()
+})
+
 loadMyGifs()
 
 if (localStorage.getItem('nightTheme')) {
