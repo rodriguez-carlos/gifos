@@ -77,8 +77,10 @@ function loadMyGifs() {
     let i
     for (i = localStorage.length - 1; i >= 0; i--) {
         let item = localStorage.getItem(localStorage.key(i))
-        localStorageArray.push(item)
-        appendGif(item)
+        if (localStorage.key(i) !== 'nightTheme') {
+            localStorageArray.push(item)
+            appendGif(item)
+        }
     }
 }
 
@@ -153,3 +155,23 @@ repeatRecordingButton.addEventListener('click', () => {
 
 loadMyGifs()
 
+const stylesheetRef = document.getElementById("stylesheet")
+const gifOsLogo = document.getElementById("gifos-logo")
+const captureCamera = document.querySelector('.icon-on-button img')
+
+function dayMode ()  {
+    stylesheetRef.setAttribute("href", "./styles/index.css")
+    gifOsLogo.setAttribute("src", "./static/gifOF_logo.png")
+    captureCamera.setAttribute('src', 'static/camera.svg')
+    localStorage.removeItem('nightTheme')
+}
+function nightMode ()  {
+    stylesheetRef.setAttribute("href", "./styles/dark_index.css")
+    gifOsLogo.setAttribute("src", "./static/gifOF_logo_dark.png")
+    captureCamera.setAttribute('src', 'static/camera_light.svg')
+    localStorage.setItem('nightTheme', '1')
+}
+
+if (localStorage.getItem('nightTheme')) {
+    nightMode()
+}

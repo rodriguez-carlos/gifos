@@ -61,23 +61,22 @@ header {
     #back-arrow {
         height: 24px;
     }
-
     .nav-left {
         display: flex;
         align-items: center;
     }
-
         img {
         height: 64px;
         width: 102.6px;
-
     }
 
     .nav-right {
         display: flex;
         justify-content: space-evenly;
 
-
+        a {
+            align-self: flex-start;
+        }
         .create-button {
             height: 36px;
             width: 144px;
@@ -90,7 +89,6 @@ header {
             color: #110038;
             margin-top: 1rem;
         }
-
         .theme-select {
             display: grid;
             grid-template-columns: auto auto;
@@ -179,7 +177,7 @@ header {
             margin-left: 16.5px;
             margin-top: 25px;
 
-            a {
+            p {
                 font-size: 16px;
                 color: #110038;
                 letter-spacing: 0;

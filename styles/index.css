@@ -129,6 +129,11 @@ header p {
           justify-content: space-evenly;
 }
 
+.main-container nav .nav-right a {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
 .main-container nav .nav-right .create-button {
   height: 36px;
   width: 144px;
@@ -277,7 +282,7 @@ header p {
   margin-top: 25px;
 }
 
-.main-container nav .nav-right .nav-link a {
+.main-container nav .nav-right .nav-link p {
   font-size: 16px;
   color: #110038;
   letter-spacing: 0;

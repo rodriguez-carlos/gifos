@@ -10,6 +10,7 @@ let suggestionsRandomIndex = Math.round(Math.random()*(suggestions.length))
 let suggested = suggestions[suggestionsRandomIndex]
 
 
+
 fetch(`${searchURL}${apiKey}&limit=4&q=${suggested}`)
     .then(response => response.json())
     .then(data => {
@@ -85,17 +86,26 @@ const sailorNightButton = document.querySelector(".theme-sailor-night")
 const stylesheetRef = document.getElementById("stylesheet")
 const gifOsLogo = document.getElementById("gifos-logo")
 
-sailorDayButton.addEventListener("click", () => {
+function dayMode ()  {
     stylesheetRef.setAttribute("href", "./styles/index.css")
     gifOsLogo.setAttribute("src", "./static/gifOF_logo.png")
     dropdownMenu.style.display = "none"
-})
-
-sailorNightButton.addEventListener("click", () => {
+    localStorage.removeItem('nightTheme')
+}
+function nightMode ()  {
     stylesheetRef.setAttribute("href", "./styles/dark_index.css")
     gifOsLogo.setAttribute("src", "./static/gifOF_logo_dark.png")
     dropdownMenu.style.display = "none"
-})
+    localStorage.setItem('nightTheme', '1')
+}
+
+sailorDayButton.addEventListener("click", dayMode)
+
+sailorNightButton.addEventListener("click", nightMode)
+
+if (localStorage.getItem('nightTheme')) {
+    nightMode()
+}
 
 const searchButton = document.querySelector(".search-button")
 const searchBar = document.querySelector(".search-bar")
@@ -107,10 +117,16 @@ searchField.addEventListener('input', (event) => {
     if (event.target.value) {
         searchButton.classList.add('active-search-button')
         searchButton.classList.add('dotted-hover')
-        lookingGlass.setAttribute("src", "static/lupa.svg")
+        lookingGlass.classList.add('active-looking-glass')
+        if (localStorage.getItem('nightTheme')) {
+            lookingGlass.setAttribute("src", "static/lupa_light.svg")
+        } else {
+            lookingGlass.setAttribute("src", "static/lupa.svg")
+        }
     } else {
         searchButton.classList.remove("active-search-button")
         searchButton.classList.remove("dotted-hover")
+        lookingGlass.classList.remove('active-looking-glass')
         lookingGlass.setAttribute("src", "static/lupa_inactive.svg")
     }
 })
@@ -118,10 +134,9 @@ searchField.addEventListener('input', (event) => {
 searchButton.addEventListener("click", () => {
     const resultsBar = document.getElementById("search-results-header")
     const searchQuery = searchField.value
+    resultsBar.innerHTML = 'Resultados: ' + searchQuery
     if (searchQuery) {
         resultsBar.style.display = "flex"
-        searchBar.style.display = "none"
-        searchBackButton.style.display = "block"
         getSearchResults(searchQuery)
     }
 })
@@ -160,9 +175,10 @@ function loadMyGifs() {
     let i
     for (i = localStorage.length - 1; i >= 0; i--) {
         let item = localStorage.getItem(localStorage.key(i))
-        localStorageArray.push(item)
-        console.log(item)
-        appendGif(item)
+        if (localStorage.key(i) !== 'nightTheme') {
+            localStorageArray.push(item)
+            appendGif(item)
+        }
     }
 }
 const suggestionsHeader = document.getElementById('poof')
