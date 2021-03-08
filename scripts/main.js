@@ -134,7 +134,7 @@ searchField.addEventListener('input', (event) => {
 searchButton.addEventListener("click", () => {
     const resultsBar = document.getElementById("search-results-header")
     const searchQuery = searchField.value
-    resultsBar.innerHTML = 'Resultados: ' + searchQuery
+    resultsBar.innerHTML = 'Resultados:&nbsp;<i>' + searchQuery + '</i>'
     if (searchQuery) {
         resultsBar.style.display = "flex"
         getSearchResults(searchQuery)
@@ -145,6 +145,7 @@ function getSearchResults(searchQuery) {
     fetch(`${searchURL}${apiKey}&limit=16&q=${searchQuery}`)
         .then(response => response.json())
         .then(data => {
+            document.querySelector(".search-results-posts").innerHTML = ""
             data.data.forEach((item, index) => {
                 const gifResult = document.createElement("div")
                 gifResult.setAttribute("class", "gif-result")
@@ -186,12 +187,14 @@ const suggestionsContainer = document.querySelector('.suggestions')
 const trendingHeader = document.querySelector('.trending-header')
 const trendingContainer = document.querySelector('.trending')
 const searchResults = document.querySelector('.search-results')
+const myGifsContainer = document.getElementById('my-gifs-gifs')
 
 myGifsButton.addEventListener('click', () => {
+    myGifsContainer.innerHTML = ""
     searchBar.style.display = "none"
     suggestionsHeader.style.display = "none"
     suggestionsContainer.style.display = "none"
-    searchResults.style.display.none = "none"
+    searchResults.style.display = "none"
     trendingHeader.innerHTML = "&nbspMis guifos"
     trendingContainer.style.display = "none"
     loadMyGifs()

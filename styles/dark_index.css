@@ -65,6 +65,10 @@ a {
   text-decoration: none;
 }
 
+i {
+  font-style: italic;
+}
+
 header {
   width: 100vw;
   background-image: -webkit-gradient(linear, right top, left top, from(#EE3EFE), to(#2E32FB));
